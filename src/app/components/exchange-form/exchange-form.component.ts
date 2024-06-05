@@ -59,6 +59,7 @@ export class ExchangeFormComponent implements OnInit {
   /* a list of available currencies. */
   public currencyList: Currency [] = [];
 
+  /* a list of conversion rates. */
   public conversionRateList: any [] = [];
 
   constructor(
@@ -68,6 +69,7 @@ export class ExchangeFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createRateRequestList();
+    
     this.currencyService.getCurrencyList().subscribe(
       (data: any) => {
         this.ceateCurrencyList(data);
@@ -124,6 +126,7 @@ export class ExchangeFormComponent implements OnInit {
     );
   }
 
+  /* start exchange process, check form group for errors, add request to list if needed, send request(s). */
   initExchange(): void {
     if (this.exchangeForm.invalid) {
       this.exchangeForm.markAllAsTouched();
@@ -193,10 +196,12 @@ export class ExchangeFormComponent implements OnInit {
 
   }
 
-  calculateTotalAmount():number {
-    return this.exchangeTotal + this.hiddenFeeTotal;
+  /* calculate final total (input and hidden fees). */
+  calculateTotalAmount(): number {
+      return Number(this.exchangeForm.controls.exchangeInput.value) + this.hiddenFeeTotal;
   }
 
+  /* function to swap the selected currency values between to and from currency controls. doing so will initiate another exchange. */
   swapCurrency(event: MouseEvent): void {
     event.preventDefault();
     let currencyFromCurrent: string | null;

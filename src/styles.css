@@ -1,6 +1,8 @@
 
 :root {
-    --color-primary:#003334;
+    --primary-color:#003334;
+    --secondary-color: #398a82;
+    --table-highlight:#f5f7f7;
 }
 
 html {

@@ -1,27 +1,38 @@
+/* header. */
 .header {
-    color: #003334;
+    color: var(--primary-color);
     letter-spacing: 1px;
 }
 
+/* table width. */
 table {
     width: 100%;
 }
 
+/* table row highligh on hover. */
 .mat-mdc-row:hover {
-    background-color:rgba(0, 51, 52, 0.02);
+    background-color: var(--table-highlight)
 }
 
+/* table container. */
 .table-container {
     background-color: #fff;
     position: relative;
     z-index: 999;
     border-radius: 8px;
-    padding: 40px;
+    padding: 24px;
     box-shadow: 0px 5px 5px -3px rgba(35, 80, 71, 0.2), 0px 8px 10px 1px rgba(35, 80, 71, 0.14), 0px 3px 14px 2px rgba(35, 80, 71, 0.12);
     -webkit-box-shadow: 0px 5px 5px -3px rgba(35, 80, 71, 0.2), 0px 8px 10px 1px rgba(35, 80, 71, 0.14), 0px 3px 14px 2px rgba(35, 80, 71, 0.12);
     -moz-box-shadow: 0px 5px 5px -3px rgba(35, 80, 71, 0.2), 0px 8px 10px 1px rgba(35, 80, 71, 0.14), 0px 3px 14px 2px rgba(35, 80, 71, 0.12);
 }
 
+@media (min-width: 576px) {
+    .table-container {
+      padding: 38px;
+  }
+}  
+
+/* table inner container. */
 .table-inner-container {
     padding: 20px;
     overflow-y: auto;
@@ -29,6 +40,7 @@ table {
     max-height: 330px;
 }
 
+/* table header container. */
 .table-header-container {
     display: flex;
     flex-direction: column;
@@ -36,4 +48,10 @@ table {
     align-items: center;
     text-align: center;
     min-height: 80px;
+}
+
+/* table header. */
+.table-header {
+    color: var(--primary-color);
+    letter-spacing: 1px;
 }

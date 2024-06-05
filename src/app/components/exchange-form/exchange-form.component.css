@@ -1,20 +1,4 @@
-.card {
-    border-radius: 8px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(35, 55, 80, 0.3) 0px 6px 12px;
-    -webkit-box-shadow: rgba(35, 55, 80, 0.3) 0px 6px 12px;
-}
-
-.header {
-    display: flex;
-    flex-direction: column;
-    -moz-box-align: center;
-    align-items: center;
-    text-align: center;
-    min-height: 105px;
-    color: #fff;
-}
-
+/* form container. */
 .form {
   display: flex;
   flex-direction: column;
@@ -26,7 +10,6 @@
   }
 }
 
-
 @media (min-width: 576px) {
     .form {
       display: grid;
@@ -37,9 +20,10 @@
     }
 }
 
+/* mat icon button background override. */
 .swap-button {
   margin-bottom: 19px;
-  background-color: #398a82 !important;
+  background-color: var(--secondary-color) !important;
 }
 
 @media (max-width: 576px) {
@@ -72,21 +56,22 @@
   }
 }
 
-.convert {
-    background-color: #398a82!important;
+/* mat button background and text color override. */
+.convert-button {
+    background-color: var(--secondary-color) !important;
     color: #fff !important;
     min-width: 0px;
     height: 56px;
 }
   
 @media (max-width: 576px) {
-    .convert {
+    .convert-button {
         width: 100%;
     }
 }
 
 @media (min-width: 576px) {
-  .convert {
+  .convert-button {
       width: 250px;
   }
 }

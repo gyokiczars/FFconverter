@@ -11,11 +11,20 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './rates-table.component.css'
 })
 export class RatesTableComponent implements OnInit, AfterViewInit {
-  
+
+  /* a list of available currencies. */
   public currencyList: Currency [] = [];
-  public dataSource = new MatTableDataSource<Currency>(this.currencyList)
+
+  /* table data source. */
+  public dataSource = new MatTableDataSource<Currency>(this.currencyList);
+
+   /* form control for from currency. */
   public currencyFrom = new FormControl('');
+
+  /* varibale to handle table reloads on new selection. */
   public currencyListLoaded: Boolean = false;
+
+  /* a list of displayed table columns. */
   public displayedColumns: string[] = ['code', 'name', 'rate'];
 
   constructor(
@@ -35,10 +44,12 @@ export class RatesTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    /* set default value and get rates. */
     this.currencyFrom.setValue('USD');
     this.getRates();
   }
 
+  /* create a list of available currencies. */
   ceateCurrencyList(data:any):void {
     for (let key in data) {
       this.currencyList.push({
@@ -52,21 +63,25 @@ export class RatesTableComponent implements OnInit, AfterViewInit {
     this.currencyListLoaded = false;
     this.rateService.getExchangeRates(this.currencyFrom.value).subscribe(
       (response: any) => {
-        console.log(response)
-        /* success. */
+
+        /* build source data for table datasource. */
         const conversion_rates = response['conversion_rates'];
+
         this.currencyList.forEach((currency:any) => {
+
           Object.keys(conversion_rates).forEach(conversion => {
+
             if (conversion == currency['code']) {
               currency['rate'] = conversion_rates[conversion];
             }
           });
+          
         });
         this.currencyListLoaded = true;
 
       },
       (error: any) => {
-        /* failure. */
+        /* error. */
         console.log('error: ' + error);
       }
     );
