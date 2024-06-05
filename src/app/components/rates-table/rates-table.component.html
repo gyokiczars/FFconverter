@@ -1,0 +1,37 @@
+<div class="table-header-container">
+    <h1 class="header">Current Exchange Rates</h1>
+</div>
+<div class="table-container">
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>From</mat-label>
+        <mat-select [formControl]="currencyFrom" (selectionChange)="getRates();">
+            <mat-option *ngFor="let currency of currencyList" [value]="currency.code">
+                {{currency.code}} - {{currency.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="table-inner-container">
+        <table *ngIf="currencyListLoaded" mat-table [dataSource]="currencyList">
+            <!-- Code Column -->
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef>Code</th>
+              <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Rate Column -->
+            <ng-container matColumnDef="rate">
+              <th mat-header-cell *matHeaderCellDef>Current Rate</th>
+              <td mat-cell *matCellDef="let element"> {{element.rate  | number: '1.0-4' }} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

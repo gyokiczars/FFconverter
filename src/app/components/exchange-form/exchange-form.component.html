@@ -1,0 +1,42 @@
+<form class="form" [formGroup]="exchangeForm">
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <span matTextPrefix>{{exchangeForm.controls.currencyFrom.value ? exchangeForm.controls.currencyFrom.value : 'USD'}} &nbsp;&nbsp;</span>
+        <input type="text" matInput [formControl]="exchangeForm.controls.exchangeInput">
+        <mat-error *ngIf="exchangeForm.controls.exchangeInput.hasError('required') || exchangeForm.controls.exchangeInput.hasError('pattern')">
+            Please enter a valid amount.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>From</mat-label>
+        <mat-select [formControl]="exchangeForm.controls.currencyFrom">
+            <mat-option *ngFor="let currency of currencyList" [value]="currency.code">
+                {{currency.code}} - {{currency.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="exchangeForm.controls.currencyFrom.hasError('required')">
+            Please select a currency.
+        </mat-error>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="swapCurrency($event);" class="swap-button">
+        <mat-icon style="color: #fff;" class="swap-button-icon">swap_horiz</mat-icon>
+    </button>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>To</mat-label>
+        <mat-select [formControl]="exchangeForm.controls.currencyTo">
+            <mat-option *ngFor="let currency of currencyList" [value]="currency.code">
+                {{currency.code}} - {{currency.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="exchangeForm.controls.currencyTo.hasError('required')">
+            Please select a currency.
+        </mat-error>
+    </mat-form-field>
+</form>
+<div *ngIf="exchangeTotal" class="exchange-total">{{ exchangeForm.controls.exchangeInput.value }} {{ exchangeForm.controls.currencyFrom.value }} = {{ exchangeTotal    | number: '1.0-4' }} {{ exchangeForm.controls.currencyTo.value }}</div>
+<div *ngIf="hiddenFeeTotal" style="color: #adb0a3">Hidden Fees: {{ hiddenFeeTotal  | number: '1.0-4' }} {{ exchangeForm.controls.currencyFrom.value }}</div>
+<div *ngIf="exchangeTotal && hiddenFeeTotal">
+    <span style="color: #398a82;">Total: {{ amountTotal | number: '1.0-4' }} {{ exchangeForm.controls.currencyFrom.value }}</span>
+</div>
+<div class="button-container">
+    <button class="convert" mat-raised-button (click)="initExchange();">Convert</button>
+</div>
