@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RateService {
 
-  private apiUrl = 'https://v6.exchangerate-api.com/v6/84d0e39da7798e4811d64c22/latest/';
+  private apiUrl = 'https://v6.exchangerate-api.com/v6/afd7c1b1430266f1b7c5232d/latest/';
 
   constructor(private http: HttpClient) { }
 
